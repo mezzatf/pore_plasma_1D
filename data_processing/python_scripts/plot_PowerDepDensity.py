@@ -13,7 +13,7 @@ Tr = 30 #ns
 fig=plt.figure(figsize=(12,8))
 
 
-PlasmaTimeFile= os.path.expanduser('./voltages/PlasmaTimeFile.csv')
+PlasmaTimeFile= os.path.expanduser('../voltages/PlasmaTimeFile.csv')
 PlasmaTimeData = pd.read_csv(PlasmaTimeFile, delimiter=",")
 
 TD = [678, 730, 882]
@@ -21,7 +21,7 @@ for Trindex, Tr in enumerate([30,100,300]):
     # PlasmaTime = list(PlasmaTimeData.iloc[Trindex])
 
     for index, VT in enumerate([200,300,400,500]):
-        PowerFile = os.path.expanduser('./PowerFile_%s.csv'%VT)
+        PowerFile = os.path.expanduser('../power_data/PowerFile_%s.csv'%VT)
         data =pd.read_csv(PowerFile, delimiter=",")
         ax = plt.subplot(gs[Trindex, index])
         if Trindex==2 :
@@ -61,19 +61,19 @@ for Trindex, Tr in enumerate([30,100,300]):
             W_D.append(W_D[-1])
             W_D.append(0)
 
-            plt.semilogy(T_D,W_D, lines[dindex],  lw=lws, color=colors[dindex], label=Label)
+            plt.plot(T_D,W_D, lines[dindex],  lw=lws, color=colors[dindex], label=Label)
             PlasmaTime = PlasmaTimeData['V=%s_%s'%(VT,d)]
             #plt.vlines(PlasmaTime[Trindex], 0,1e14, color=colors[dindex])
             plt.grid(color='grey', which="both",ls="--")
             plt.xlim(0,1000)
-            #plt.ylim(0,0.9e14)
-            #plt.yticks([0,5e13], fontsize=fs)
+            plt.ylim(0,0.9e14)
+            plt.yticks([0,5e13], fontsize=fs)
             plt.rcParams["mathtext.fontset"] = "cm"
             plt.rcParams["text.usetex"] =True
             ax.yaxis.offsetText.set_fontsize(fs-2)
             ax.yaxis.set_offset_position('left')
 
-            # plt.rc('font', size=fs-10)
+            plt.rc('font', size=fs-10)
             plt.grid(color='grey', which="both",ls="--")
             if Trindex == 0 and index == 0:
                 plt.text(500, 11*1e13, '$V_{T,Max} =$%s kV'%VT,
@@ -99,19 +99,8 @@ for Trindex, Tr in enumerate([30,100,300]):
                         )
 
         if index==0 and Trindex==0 :
-            plt.legend(loc=1, fontsize="x-large", numpoints = 1)
+            plt.legend(loc=1,  numpoints = 1)
 
 fig.subplots_adjust(bottom=0.15)
-plt.savefig("./power/Power.eps")
+plt.savefig("../Figures/PowerDepDensity.png")
 plt.show()
-
-
-#
-# ax = pl.subplot(gs[0, 0]) # row 0, col 0
-# pl.plot([0,1])
-#
-# ax = pl.subplot(gs[0, 1]) # row 0, col 1
-# pl.plot([0,1])
-#
-# ax = pl.subplot(gs[1, :]) # row 1, span all columns
-# pl.plot([0,1])

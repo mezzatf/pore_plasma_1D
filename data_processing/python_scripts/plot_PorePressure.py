@@ -12,7 +12,7 @@ lws = 4
 fig=plt.figure(figsize=(14,6))
 
 for Trindex, Tr in enumerate([30,100,300]):
-    PressureFile = os.path.expanduser('./PressureFile_%s.csv'%Tr)
+    PressureFile = os.path.expanduser('../pressure_data/PressureFile_%s.csv'%Tr)
     data =pd.read_csv(PressureFile, delimiter=",")
     ax = plt.subplot(gs[0, Trindex])
 
