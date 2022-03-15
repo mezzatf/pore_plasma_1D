@@ -86,8 +86,6 @@ vt=data[heads[0]]
 dv=data[heads[2]]
 
 
-
-
 fs  = 26 #font_size for the plot
 ms  = 16 #marker_size
 lws = 4
@@ -96,7 +94,6 @@ lws = 4
 if wop ==1:
     WTDic = {}
     PressureFile= os.path.expanduser('./PressureFile_%s.csv'%RT)
-
 
 
 if wop ==2:
@@ -239,7 +236,7 @@ for index, file in enumerate(np.arange(start_file, end_file+1)):
       # print(filedir)
       print("%s isn't a case"%file)
 
-
+# Collect the power data and insert it in the power_data directory
 if wop == 1:
    WTDic["V_Max"]      = [200, 300, 400, 500]
    WTDic["P_%s"%(10)]  = d10
@@ -248,70 +245,8 @@ if wop == 1:
    PressureDataFrame =pd.DataFrame(dict([ (k,pd.Series(v)) for k,v in WTDic.items() ]))
    PressureDataFrame.to_csv(PressureFile, encoding='utf-8', index=False)
 
-
-
-# if wop ==1:  #wop is an argument to be set when running the code
-#     fig=plt.figure(figsize=(7,5))
-#     plt.plot([100,600], [6.3+0.1,6.3+0.1], '-', color='red', lw=lws, label='$P_{P,Crit}$')
-#     print('here')
-#     print(d100)
-#     print(d50)
-#     print(d10)
-#     v = np.array([200.0, 300., 400.0, 500.])
-#     plt.plot(v, d100,   '-s',  markersize=ms, lw=lws, color="grey", label="$d_P$ = 100 $\mu m$")
-#     plt.plot(v, d50,  '--^', markersize=ms, lw=lws, color="orange", label="$d_P$ = 50 $\mu m$")
-#     plt.plot(v, d10,  ':D', markersize=ms, lw=lws, color="green",   label="$d_P$ = 10 $\mu m$")
-#     plt.grid(color='grey', which="both",ls="--")
-#     plt.xlabel("$V_{T,Max}$ [kV]", fontsize=fs)
-#     plt.xticks(fontsize=fs)
-#     plt.ylabel("$P_{P,f}$ [MPa]", fontsize=fs)
-#     plt.yticks(fontsize=fs)
-#     plt.xlim(100,600)
-#     plt.ylim(0,10)
-#     plt.rcParams["mathtext.fontset"] = "cm"
-#     plt.rcParams["text.usetex"] =True
-#     #plt.rc('font', size=fs-10)
-#     plt.legend(loc=2, fontsize="large", numpoints = 1)
-#
-#     # plt.figure(figsize=(10,8))
-#     # plt.plot(v, W100,   '-s',  markersize=ms, lw=lws, color="grey", label="$d_P$ = 100 $\mu m$")
-#     # plt.plot(v, W50,  '--^', markersize=ms, lw=lws, color="orange", label="$d_P$ = 50 $\mu m$")
-#     # plt.plot(v, W10,  ':D', markersize=ms, lw=lws, color="green",   label="$d_P$ = 10 $\mu m$")
-#
-#     fig.subplots_adjust(bottom=0.15)
-#
-#     plt.show()
-
-
+# Calculate the pressure and insert it in the pressure_data directory
 if wop ==2: #wop is an argument to be set when running the code
     PowerDataFrame =pd.DataFrame(dict([ (k,pd.Series(v)) for k,v in WTDic.items() ]))
     PowerDataFrame.to_csv(PowerFile, encoding='utf-8', index=False)
     print(Wt[index_start])
-    # plt.xlabel("$t\; \mathrm{[ns]}$", fontsize=fs)
-    # plt.xticks(fontsize=fs)
-    # plt.xlim(0,500)
-    # plt.ylim(0,9*1e13)
-    # # plt.yscale('log')
-    # plt.ylabel("$W_{Dep}\; \mathrm{\; [W/m^3]}$", fontsize=fs)
-    # plt.grid(color='grey', which="both",ls="--")
-    #
-    # plt.rc('font', size=fs-18)
-    # plt.ticklabel_format(style='sci', axis='y', scilimits=(0,12))
-    # plt.legend(loc=0, fontsize="xx-large", numpoints = 1)
-    # plt.show()
-
-if wop ==3:
-    V_peak = 500.0 #kV
-    tt= np.linspace(0.0, 1e-6, 1000)
-    print(tt)
-    V_t = V_peak * np.tanh(27*1e6*tt)
-    print(V_t)
-    plt.plot(tt*1e9, V_t,  '-', lw=lws, color="red")
-    plt.grid(color='grey', which="both",ls="--")
-    #plt.ylabel("$\\tau_{bd}$ [ns]", fontsize=fs)
-    plt.ylabel("$\mathrm{V_T}$ [kV]", fontsize=fs)
-    plt.xticks(fontsize=fs)
-    plt.yticks(fontsize=fs)
-    #plt.xlim(0,1000)
-    #plt.legend(loc=0, fontsize="xx-large", numpoints = 1)
-    plt.show()

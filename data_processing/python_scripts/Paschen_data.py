@@ -95,38 +95,3 @@ for j in np.arange(12):
 PlasmaFormation = os.path.expanduser("./voltages/PlasmaFormation.csv")
 df = DataFrame(data, columns = heads)
 df.to_csv(PlasmaFormation, encoding='utf-8', index=False)
-
-
-# plt.figure(figsize=(10,7.5))
-#
-# plt.text(1, 150/1000, "Ionized gas", family="Comic Sans MS", size=fs+6)
-# plt.text(1, 10000/1000, "Plasma",  family="Comic Sans MS", size=fs+6)
-#
-# plt.xscale("log")
-# plt.yscale("log")
-# plt.ylabel("$V_{P,Min}$ [kV]", fontsize=fs)
-# plt.xlabel("$P_{P,i}\cdot d_P$ [$\mathrm{MPa\cdot \mu m}$]", fontsize=fs)
-#
-# plt.plot(pd[9:12], vv[9:12]/1000, ":<",  markersize=ms, lw=lws,  label="$V_{T,Max}=$ 500 kV")
-# plt.plot(pd[6:9],  vv[6:9]/1000,  "-^",  markersize=ms, lw=lws,  label="$V_{T,Max}=$ 400 kV")
-# plt.plot(pd[3:6],  vv[3:6]/1000,  "--s", markersize=ms, lw=lws,  label="$V_{T,Max}=$ 300 kV")
-# plt.plot(pd[:3] ,  vv[:3]/1000,   "-.*", markersize=ms, lw= lws, label="$V_{T,Max}=$ 200 kV")
-# plt.plot(Pr*d, V_bd_n*1.0e3/1000, lw=6, color="black", label="Paschen curve")
-#
-#
-#
-#
-# miny = 70/1000
-# maxy = 70000/1000
-# plt.xlim(.5,100)
-# plt.ylim(70/1000,70000/1000)
-# plt.rcParams['xtick.labelsize']=fs
-# plt.rcParams['ytick.labelsize']=fs
-# plt.rcParams["mathtext.fontset"] = "cm"
-# plt.rcParams["text.usetex"] =True
-# plt.fill_between(Pr*d,V_bd_n*1.0e3/1000,maxy,color="LightCyan")
-# plt.fill_between(Pr*d,V_bd_n*1.0e3/1000,miny,color="LightGray")
-#
-# plt.legend(loc=1, numpoints = 1, prop={"size":fs-6})
-#
-# plt.show()
